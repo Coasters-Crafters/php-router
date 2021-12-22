@@ -1,4 +1,4 @@
-**Coasters & Crafters Web Rooter**
+**PHP Web Rooter**
 
 **Requirements**
 - nd_mysqli (Not mysqli)
