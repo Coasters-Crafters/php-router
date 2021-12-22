@@ -51,10 +51,54 @@
 <h5>Using params.</h5>
 <p>Go to the database and edit the location to include :paramname (eg. :id) so it will look like <i>/page2/:id</i>. Once done the page will save the param as a variable. This variable will be <i>$page['params']['paramname']</i> (eg. $page['params']['id']) which you can use in your PHP code.</p>
 <br>
-  
-  
-  
-  
-<h5></h5>
-<p></p>
-<br>
+<h5>Posting to the page.</h5>
+<p>When posting to a page you must start by creating a function:</p>
+```
+  function name {
+      $.post("/_pages/router.php", {
+          request: "name",
+          route: "/location"
+      }, (data) => {
+          if (data.success) {
+              alert(data.success);
+          } else {
+              alert(data.error);
+          }
+      })
+  }
+```
+the request must be the name of the function and the route must be the location (eg. route: "/page2"). Once the function is made, you can create the post by adding this at the top of the page:
+```
+if (isset($_POST['request'])) {
+    $response = new stdClass();
+    if ($_POST['request'] == "name") {
+        // Success Message
+        $response->success = "Sucess message!";
+        // Error Message
+        $response->error = "Error Message!";
+    }
+    header("content-type:application/json");
+    echo json_encode($response);
+    die();
+}
+```
+you can do multiple posts on a page by creating multiple functions. at the top of the page the code will change to look like this.
+```
+if (isset($_POST['request'])) {
+    $response = new stdClass();
+    if ($_POST['request'] == "name") {
+        // Success Message
+        $response->success = "Sucess message!";
+        // Error Message
+        $response->error = "Error Message!";
+    } else if ($_POST['request'] == "name2") {
+        // Success Message
+        $response->success = "Sucess message!";
+        // Error Message
+        $response->error = "Error Message!";
+    }
+    header("content-type:application/json");
+    echo json_encode($response);
+    die();
+}
+```
