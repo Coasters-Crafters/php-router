@@ -1,5 +1,4 @@
 **Coasters & Crafters Web Rooter**
-_This is used to control and make pages on our website load faster._
 
 **Requirements**
 - nd_mysqli (Not mysqli)
