@@ -1,4 +1,4 @@
-**PHP Web Rooter**
+**PHP Web Router**
 
 **Requirements**
 - nd_mysqli (Not mysqli)
@@ -6,10 +6,10 @@
 - PHP 7.4
 - Database
 
-**Installing the rooter.**
+**Installing the router.**
 
 _Uploading_
-> To install the rooter you need to upload all of the files to a public html folder and install the <i>websites.sql</i> to a MYSQL database.
+> To install the router you need to upload all of the files to a public html folder and install the <i>websites.sql</i> to a MYSQL database.
 
 _Setting up Database._
 > go to */_inc/config.inc.php* and update the IP, username, password & database accordingly.
@@ -34,7 +34,7 @@ _Editing the header and footer._
 > Go to */index.php* and update the header and footer of the website by changing the code inbetween the header or the footer tags.
 
 _Editing the home page._
-> Go to */_pages/_internal/home.php* and add the code for your homepage. (no need to add a header and footer, the rooter deals with this)
+> Go to */_pages/_internal/home.php* and add the code for your homepage. (no need to add a header and footer, the router deals with this)
 
 _Creating a page._
 > Go to */_pages/_internal/* create a PHP file for the page, in the database visit the pages table and create a new entry with the location eg. /page2 the file (the one you made in the folder) and the page title.
