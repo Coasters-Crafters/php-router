@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+Options -Indexes
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .? - [S=2]
+
+RewriteRule . index.php
+</IfModule>
