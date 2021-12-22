@@ -37,7 +37,7 @@
 
 <h4>Editing Pages.</h4>
 <h5>Editing the header and footer.</h5>
-<p>Go to <i>/index.php</i> and update the header and footer of the website by changing the code inbetween the <header> or the <footer> tags.</p>
+<p>Go to <i>/index.php</i> and update the header and footer of the website by changing the code inbetween the header or the footer tags.</p>
 <br>
 <h5>Editing the home page.</h5>
 <p>Go to <i>/_pages/_internal/home.php</i> and add the code for your homepage. (no need to add a header and footer, the rooter deals with this)</p>
