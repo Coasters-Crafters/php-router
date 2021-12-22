@@ -67,7 +67,7 @@
       })
   }
 ```
-the request must be the name of the function and the route must be the location (eg. route: "/page2"). Once the function is made, you can create the post by adding this at the top of the page:
+<p>the request must be the name of the function and the route must be the location (eg. route: "/page2"). Once the function is made, you can create the post by adding this at the top of the page:</p>
 ```
 if (isset($_POST['request'])) {
     $response = new stdClass();
@@ -82,7 +82,7 @@ if (isset($_POST['request'])) {
     die();
 }
 ```
-you can do multiple posts on a page by creating multiple functions. at the top of the page the code will change to look like this.
+<p>you can do multiple posts on a page by creating multiple functions. at the top of the page the code will change to look like this.</p>
 ```
 if (isset($_POST['request'])) {
     $response = new stdClass();
