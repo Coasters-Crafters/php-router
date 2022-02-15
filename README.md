@@ -1,99 +1,66 @@
-**PHP Web Router**
+## PHP + page.js Router
 
-**Requirements**
-- nd_mysqli (Not mysqli)
-- mysqlnd
-- PHP 7.4
-- Database
+A simple and easy to use, page.js based + php integration AJAX page router.
 
-**Installing the router.**
+### Installation
 
-_Uploading_
-> To install the router you need to upload all of the files to a public html folder and install the <i>websites.sql</i> to a MYSQL database.
+Clone the repo into your brand new website.
 
-_Setting up Database._
-> go to */_inc/config.inc.php* and update the IP, username, password & database accordingly.
-
-_Changing File Location._
-> go to */_inc/global.inc.php* and update */home/user/public_html (line 2)* with the correct file path to the website.
-
-_Changing the Domain Settings._
-> go to */_inc/global.php* and change *domain.com (line 15)* to the correct domain for your site.
-
-_Updating the website title._
-> go to */_inc/pages.inc.php* and change *Domain - {$title} (line 24)* to the correct title make sure to keep {$title} as that will display the page name.
-
-_Installing CSS & Scripts._
-> Go to */index.php* and add add css files at the top of the file. (Store CSS files in */assets/css/*) and for scripts, add them at the bottom of the file. (Store CSS files in */assets/scripts/*)
-
-
-
-**Editing Pages.**
-
-_Editing the header and footer._
-> Go to */index.php* and update the header and footer of the website by changing the code inbetween the header or the footer tags.
-
-_Editing the home page._
-> Go to */_pages/_internal/home.php* and add the code for your homepage. (no need to add a header and footer, the router deals with this)
-
-_Creating a page._
-> Go to */_pages/_internal/* create a PHP file for the page, in the database visit the pages table and create a new entry with the location eg. /page2 the file (the one you made in the folder) and the page title.
-
-
-
-**Other Information**
-
-_Using params._
-> Go to the database and edit the location to include :paramname (eg. :id) so it will look like */page2/:id*. Once done the page will save the param as a variable. This variable will be *$page['params']['paramname']* (eg. $page['params']['id']) which you can use in your PHP code.
-
-_Posting to the page._
-> When posting to a page you must start by creating a function:
 ```
-  function name {
-      $.post("/_pages/router.php", {
-          request: "name",
-          route: "/location"
-      }, (data) => {
-          if (data.success) {
-              alert(data.success);
-          } else {
-              alert(data.error);
-          }
-      })
-  }
+git clone https://github.com/Coasters-Crafters/php-router.git
 ```
-> the request must be the name of the function and the route must be the location (eg. route: "/page2"). Once the function is made, you can create the post by adding this at the top of the page:
+
+Then, depending on your webserver, follow [this guide](https://github.com/visionmedia/page.js#server-configuration).
+
+### Configuration
+
+This router works like the Next.js router, only PHP.
+
+#### Global PHP File
+
+In `router.php` on line `2`, there's a require_once, update this with a php file you want included on all pages. This is useful for specifying classes or a database connection. 
+
+#### Normal Routing
+
+All routes look inside of the `pages/files` directory with the path of the url.
+
+e.g: I want to navigate to https://example.com/help. To do this, I would make a file in `pages/files` called `help.php`.
+
+Since this doesn't have any parameters in it, I don't need to edit the router settings.
+
+#### Param Routing
+
+Now, lets say I want to lookup a user. I can do this by naming my php file something special.
+
+e.g: I want to view a user called Joe with the user ID of 1, the URL is https://example.com/users/1. To do this, I would make a file called `users[id].php`. Then, navigate to the router.js file and add to the `customRoutes` list. This routes name would be `/users/:id`. Then, in that PHP file, I can specify the following to get the params.
+
+```php
+The ID is <?php echo $_PARAMS['id']?>
 ```
-if (isset($_POST['request'])) {
-    $response = new stdClass();
-    if ($_POST['request'] == "name") {
-        // Success Message
-        $response->success = "Sucess message!";
-        // Error Message
-        $response->error = "Error Message!";
+
+This also works for multiple params by naming the file `users[param1][param2].php`. The route that goes in router.js would look like `/:param1/:param2.php`
+
+Extending this past the params involves turning the php file into a folder (so the folder name would be `users[id]`) and putting an `index.php` inside the folder, then you can append to your `customRoutes` in `router.js` and add more routes under the `users[id]` folder.
+
+#### Posting & Other Request Methods
+
+Use the path specified in the `router.js` file to be able to post, here's a fetch example.
+
+```js
+let resp = (await fetch("/pages/router.php?path=/your/path/in/router.js", {
+    method: "POST",
+    
+    body: JSON.stringify({
+        your: "body"
+    }),
+
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
     }
-    header("content-type:application/json");
-    echo json_encode($response);
-    die();
-}
+}));
+
 ```
-> you can do multiple posts on a page by creating multiple functions. at the top of the page the code will change to look like this.
-```
-if (isset($_POST['request'])) {
-    $response = new stdClass();
-    if ($_POST['request'] == "name") {
-        // Success Message
-        $response->success = "Sucess message!";
-        // Error Message
-        $response->error = "Error Message!";
-    } else if ($_POST['request'] == "name2") {
-        // Success Message
-        $response->success = "Sucess message!";
-        // Error Message
-        $response->error = "Error Message!";
-    }
-    header("content-type:application/json");
-    echo json_encode($response);
-    die();
-}
-```
+
+
+
+There are examples in the boilerplate.

@@ -1,0 +1,1 @@
+The News ID is <?php echo $_PARAMS['id']?>
