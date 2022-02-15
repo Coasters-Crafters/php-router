@@ -32,15 +32,17 @@ Since this doesn't have any parameters in it, I don't need to edit the router se
 
 Now, lets say I want to lookup a user. I can do this by naming my php file something special.
 
-e.g: I want to view a user called Joe with the user ID of 1, the URL is https://example.com/users/1. To do this, I would make a file called `users[id].php`. Then, navigate to the router.js file and add to the `customRoutes` list. This routes name would be `/users/:id`. Then, in that PHP file, I can specify the following to get the params.
+e.g: I want to view a user called Joe with the user ID of 1, the URL is https://example.com/users/1. To do this, I would make a file called `users[id].php`. Then, navigate to the router.js file and add to the `customRoutes` list. This route's name would be `/users/:id`. Then, in that PHP file, I can specify the following to get the params.
 
 ```php
-The ID is <?php echo $_PARAMS['id']?>
+<?php echo $_PARAMS['id']?>
 ```
 
 This also works for multiple params by naming the file `users[param1][param2].php`. The route that goes in router.js would look like `/:param1/:param2.php`
 
 Extending this past the params involves turning the php file into a folder (so the folder name would be `users[id]`) and putting an `index.php` inside the folder, then you can append to your `customRoutes` in `router.js` and add more routes under the `users[id]` folder.
+
+There are examples of all ways of routing in the boilerplate.
 
 #### Posting & Other Request Methods
 
@@ -61,6 +63,14 @@ let resp = (await fetch("/pages/router.php?path=/your/path/in/router.js", {
 
 ```
 
+#### Custom 404 Page
 
+Edit the `404.html` page in `/pages/` to customize what your 404 page should look like.
 
-There are examples in the boilerplate.
+### Development
+
+The easiest way to quickly start this up is with the PHP Development Server:
+
+```cmd
+php -S localhost:8080
+```
