@@ -8,7 +8,7 @@ if ($path == "/") $path = "/index";
 
 $parsedPath = "";
 foreach(explode("/", $path) as $part) {
-    $parsedPath .= strpos($part, ":") ? str_replace(":", "[", $part)."]" : "/".$part; 
+    $parsedPath .= strpos($part, ":") !== false ? str_replace(":", "[", $part)."]" : "/".$part; 
 }
 
 $_PARAMS = [];
